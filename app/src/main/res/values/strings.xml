@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Hillfort Placemarks</string>
+
+    <string name="hint_placemarkTitle">Hillfort Name</string>
+    <string name="hint_placemarkDescription">Hillfort Description</string>
+
+
+    <string name="button_addPlacemark"> Add Hillfort</string>
+    <string name="button_deletePlacemark"> Delete Hillfort</string>
+    <string name="button_savePlacemark"> Save Hillfort </string>
+
+    <string name="menu_addPlacemark">Add</string>
+    <string name="menu_cancel">Cancel</string>
+
+    <string name="enter_placemark_title"> Please enter name of hillfort </string>
+
+</resources>
