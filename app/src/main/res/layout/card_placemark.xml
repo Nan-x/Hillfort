@@ -11,6 +11,17 @@ android:elevation="24dp">
     android:layout_height="wrap_content"
     android:padding="16dp">
 
+
+    <ImageView
+        android:id="@+id/imageIcon"
+        android:layout_width="112dp"
+        android:layout_height="95dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/change_placemark_image" />
+
     <TextView
         android:id="@+id/placemarkTitle"
         android:layout_width="wrap_content"
