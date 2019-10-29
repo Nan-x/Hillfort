@@ -17,6 +17,7 @@ import com.example.placemark.helpers.readImageFromPath
 import com.example.placemark.helpers.showImagePicker
 import com.example.placemark.main.MainApp
 import com.example.placemark.models.PlacemarkModel
+import org.jetbrains.anko.intentFor
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
@@ -61,8 +62,9 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         }
 
         placemarkLocation.setOnClickListener {
-            info ("Set Location Pressed")
+            startActivity (intentFor<MapActivity>())
         }
+
 
             /*  btnDelete.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()

@@ -20,5 +20,7 @@
     <string name="select_placemark_image">Select hillfort image</string>
     <string name="change_placemark_image">Change placemark image</string>
 
+    <string name="title_activity_map">Map</string>
+
 
 </resources>
