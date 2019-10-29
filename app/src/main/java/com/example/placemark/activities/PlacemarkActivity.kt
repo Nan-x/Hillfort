@@ -16,6 +16,7 @@ import com.example.placemark.helpers.readImage
 import com.example.placemark.helpers.readImageFromPath
 import com.example.placemark.helpers.showImagePicker
 import com.example.placemark.main.MainApp
+import com.example.placemark.models.Location
 import com.example.placemark.models.PlacemarkModel
 import org.jetbrains.anko.intentFor
 
@@ -25,6 +26,9 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     var edit = false
 
     val IMAGE_REQUEST = 1
+
+    val LOCATION_REQUEST = 2
+    var location = Location(52.245696, -7.139102, 15f)
 
 
     lateinit var app: MainApp
@@ -62,8 +66,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         }
 
         placemarkLocation.setOnClickListener {
-            startActivity (intentFor<MapActivity>())
+            startActivityForResult(intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
         }
+
+
 
 
             /*  btnDelete.setOnClickListener() {
@@ -112,17 +118,11 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                     placemarkImage.setImageBitmap(readImage(this, resultCode, data))
                     chooseImage.setText(R.string.change_placemark_image)
                 }
-
-                if (intent.hasExtra("placemark_edit")) {
-                    //... as before
-                    placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
-                    if (placemark.image != null) {
-                        chooseImage.setText(R.string.change_placemark_image)
-                    }
-
-
+            }
+            LOCATION_REQUEST -> {
+                if (data != null) {
+                    location = data.extras?.getParcelable<Location>("location")!!
                 }
-
             }
         }
     }
