@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener {
+class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener,  GoogleMap.OnMarkerClickListener {
 
     private lateinit var map: GoogleMap
     var location = Location()
@@ -29,6 +29,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         mapFragment.getMapAsync(this)
     }
 
+
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         val loc = LatLng(location.lat, location.lng)
@@ -40,6 +41,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         map.addMarker(options)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
         map.setOnMarkerDragListener(this)
+        map.setOnMarkerClickListener(this)
     }
 
 
@@ -55,6 +57,12 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         location.zoom = map.cameraPosition.zoom
     }
 
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val loc = LatLng(location.lat, location.lng)
+        marker.setSnippet("GPS : " + loc.toString())
+        return false
+    }
+
     override fun onBackPressed() {
         val resultIntent = Intent()
         resultIntent.putExtra("location", location)
@@ -62,4 +70,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         finish()
         super.onBackPressed()
     }
+
+
+
 }
