@@ -13,29 +13,13 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import com.example.placemark.R
 import com.example.placemark.helpers.readImage
-import com.example.placemark.helpers.readImageFromPath
 import com.example.placemark.helpers.showImagePicker
 import com.example.placemark.main.MainApp
 import com.example.placemark.models.Location
 import com.example.placemark.models.PlacemarkModel
 import org.jetbrains.anko.intentFor
-import android.app.ProgressDialog
-import android.content.Context
-import android.os.AsyncTask
-import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
-import com.example.placemark.helpers.PreferenceHelper
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.android.extension.responseJson
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.IOException
-import java.util.HashMap
-import com.example.placemark.activities.LoginActivity
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
@@ -51,56 +35,17 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     internal var RegisterURL = "https://demonuts.com/Demonuts/JsonTest/Tennis/simpleregister.php"
     private var etname: EditText? = null
 
-    private var etusername:EditText? = null
-    private var etpassword:EditText? = null
-    private var btnregister: Button? = null
-    private var tvlogin: TextView? = null
-    private var preferenceHelper: PreferenceHelper? = null
-    private val RegTask = 1
-    private var mProgressDialog: ProgressDialog? = null
-
-
     lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activityplacemark)
+
+        setSupportActionBar(findViewById(R.id.toolbarUp))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         app = application as MainApp
 
-        preferenceHelper = PreferenceHelper(this)
-
-
-    /*    if (preferenceHelper!!.getIsLogin()) {
-            val intent = Intent(this@PlacemarkActivity, PlacemarkListActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            this.finish()
-        }
-
-
-        etname = findViewById<View>(R.id.etname) as EditText
-        etusername = findViewById<View>(R.id.etusername) as EditText
-        etpassword = findViewById<View>(R.id.etpassword) as EditText
-
-        btnregister = findViewById<View>(R.id.btn) as Button
-        tvlogin = findViewById<View>(R.id.tvlogin) as TextView
-
-        tvlogin!!.setOnClickListener {
-            val intent = Intent(this@PlacemarkActivity, LoginActivity::class.java)
-            startActivity(intent)
-        }
-
-        btnregister!!.setOnClickListener {
-            try {
-                register()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            } catch (e: JSONException) {
-                e.printStackTrace()
-            }
-        }
-
-*/
 
         if (intent.hasExtra("placemark_edit")) {
             edit = true
@@ -113,7 +58,14 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         if (intent.hasExtra("placemark delete")){
             delete = true
             placemark = intent.extras?.getParcelable<PlacemarkModel>("")!!
-            app.placemarks.
+            app.placemarks.delete(placemark.copy())
+        }
+
+
+
+        btnDelete.setOnClickListener(){
+            app.placemarks.delete(placemark.copy())
+            toast("Placemark Deleted")
         }
 
 
@@ -147,25 +99,38 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             startActivityForResult(intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
         }
 
+        addNotes.setOnClickListener {
+           placemark.notes = placemarkDescription.text.toString()
+        }
+
+
 
         cb_single.setOnClickListener(View.OnClickListener {
             if (cb_single.isChecked) {
+                placemark.visited = true
                 toast(cb_single.text.toString() + " Checked")
             } else {
                 toast(cb_single.text.toString() + " UnChecked")
+                placemark.visited = false
             }
         })
 
 
 
         chooseImage.setOnClickListener {
-            showImagePicker(this, IMAGE_REQUEST)
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_REQUEST)
         }
 
 
 
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
+        toolbarUp.title = "Create New Hillfort"
+        setSupportActionBar(toolbarUp)
         info("Placemark Activity started..")
 
 

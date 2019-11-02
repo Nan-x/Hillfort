@@ -7,10 +7,20 @@
     android:gravity="center"
     android:background="#a2ff7a">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/etname"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:paddingLeft="5dp"
+        android:background="#fff"
+        android:hint="Enter Name" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:inputType="textEmailAddress"
         android:id="@+id/etemail"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
@@ -18,6 +28,17 @@
         android:paddingLeft="5dp"
         android:background="#fff"
         android:hint="Enter Email" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/etstudentid"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:paddingLeft="5dp"
+        android:background="#fff"
+        android:hint="Enter Student ID" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -32,8 +53,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnLogin"
-        android:text="Log In"
+        android:id="@+id/btnSignup"
+        android:text="Register"
         android:background="#70c95f"
         android:textColor="#000"
         android:layout_marginTop="10dp"
@@ -43,10 +64,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:id="@+id/signup"
+        android:id="@+id/login"
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:text="Not a member? Sign Up!"/>
+        android:text="Already Registered? Login here"/>
+
 </LinearLayout>

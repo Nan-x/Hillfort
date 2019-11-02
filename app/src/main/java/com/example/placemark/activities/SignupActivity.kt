@@ -15,39 +15,43 @@ import com.example.placemark.R
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.extension.responseJson
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_signup.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 
-class LoginActivity : AppCompatActivity() {
+class SignupActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         // get reference to all views
-        var et_email = findViewById(R.id.etemail) as EditText
+        var et_user_name = findViewById(R.id.etname) as EditText
+        var et_user_email = findViewById(R.id.etemail) as EditText
         var et_password = findViewById(R.id.etpassword) as EditText
-        var btnLogin = findViewById(R.id.btnLogin) as Button
+        var et_studentid = findViewById(R.id.etstudentid) as EditText
+        var btn_submit = findViewById(R.id.btnSignup) as Button
 
 
         // set on-click listener
-        btnLogin.setOnClickListener {
-            val user_email = et_email.text;
+        btnSignup.setOnClickListener {
+            val user_name = et_user_name.text;
+            val user_email = et_user_email.text;
+            val studentid = et_studentid.text;
             val password = et_password.text;
-            Toast.makeText(this@LoginActivity, user_email, Toast.LENGTH_LONG).show()
+            Toast.makeText(this@SignupActivity, user_name, Toast.LENGTH_LONG).show()
 
             // your code to validate the user_name and password combination
             // and verify the same
 
         }
 
-        signup.setOnClickListener{
-            val intent = Intent(this@LoginActivity, SignupActivity::class.java)
+        login.setOnClickListener{
+            val intent = Intent(this@SignupActivity, LoginActivity::class.java)
             startActivity(intent)
         }
 
     }
 
 }
-

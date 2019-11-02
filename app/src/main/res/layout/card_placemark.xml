@@ -35,6 +35,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/placemarkTitle" />
 
+    <TextView
+        android:id="@+id/placemarkLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/placemarkTitle" />
+
     <CheckBox
         android:id="@+id/cb_single"
         android:layout_width="183dp"

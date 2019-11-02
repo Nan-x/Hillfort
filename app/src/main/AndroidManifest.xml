@@ -45,6 +45,8 @@
 
         </activity>
 
+        <activity android:name=".activities.SignupActivity"></activity>
+
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -61,7 +63,9 @@
         <activity
             android:name=".activities.MapActivity"
             android:label="@string/title_activity_map" />
-        <activity android:name=".activities.PlacemarkActivity" />
+        <activity
+            android:name=".activities.PlacemarkActivity"
+            android:parentActivityName=".activities.PlacemarkListActivity"/>
         <activity android:name=".activities.PlacemarkListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
