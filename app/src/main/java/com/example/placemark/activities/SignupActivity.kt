@@ -57,10 +57,10 @@ class SignupActivity : AppCompatActivity() {
 
 
         btn_Signup.setOnClickListener() {
-            val name = et_new_name.text.toString()
+          //  val name = et_new_name.text.toString()
             val signup_email = et_new_email.text.toString()
             val password = et_new_password.text.toString()
-            val studentid = et_new_studentid.text.toString()
+         //   val studentid = et_new_studentid.text.toString()
 
 
 
@@ -96,8 +96,8 @@ class SignupActivity : AppCompatActivity() {
 
                     toast("New User Success $user")
 
-                    val intentRegister = Intent(this@SignupActivity, LoginActivity::class.java)
-                    startActivity(intentRegister)
+                    val intent = Intent(this@SignupActivity, PlacemarkListActivity::class.java)
+                    startActivity(intent)
 
                 } else {
                     // If sign up fails, display a message to the user.

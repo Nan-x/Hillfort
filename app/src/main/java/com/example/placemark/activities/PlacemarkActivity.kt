@@ -20,6 +20,7 @@ import com.example.placemark.models.PlacemarkModel
 import org.jetbrains.anko.intentFor
 import android.view.View
 import android.widget.EditText
+import kotlinx.android.synthetic.main.activityplacemark.view.*
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 

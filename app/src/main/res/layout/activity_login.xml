@@ -10,6 +10,20 @@
     tools:context=".activities.LoginActivity">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log In"
+        android:textColor="#fff"
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="306dp"
+        android:layout_height="238dp"
+        android:src="@drawable/a_hillfort" />
+
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -43,12 +57,12 @@
         android:layout_marginRight="20dp"/>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
         android:id="@+id/signup"
-        android:gravity="center"
+        android:layout_width="232dp"
+        android:layout_height="40dp"
         android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Not a member? Sign Up!"
         android:textColor="#fff"
-        android:textSize="20sp"
-        android:text="Not a member? Sign Up!"/>
+        android:textSize="20sp" />
 </LinearLayout>
