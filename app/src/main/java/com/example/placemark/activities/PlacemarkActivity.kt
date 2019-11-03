@@ -75,6 +75,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             btnAdd.setOnClickListener() {
                 placemark.title = placemarkTitle.text.toString()
                 placemark.description = placemarkDescription.text.toString()
+                placemark.notes = placemarkDescription.text.toString()
                 if (placemark.title.isEmpty()) {
                     toast(R.string.enter_placemark_title)
                 } else {
@@ -91,6 +92,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
 
 
+
         placemarkLocation.setOnClickListener {
             val location = Location(52.245696, -7.139102, 15f)
             if (placemark.zoom != 0f) {
@@ -99,10 +101,6 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                 location.zoom = placemark.zoom
             }
             startActivityForResult(intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
-        }
-
-        addNotes.setOnClickListener {
-           placemark.notes = placemarkDescription.text.toString()
         }
 
 
@@ -131,9 +129,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
-        toolbarUp.title = "Create New Hillfort"
+        toolbarUp.title = "Create and Edit Hillfort"
         setSupportActionBar(toolbarUp)
         info("Placemark Activity started..")
+
 
 
     }
