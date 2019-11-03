@@ -23,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
         //4second splash time
         Handler().postDelayed({
             //start main activity
-            startActivity(Intent(this@SplashActivity, PlacemarkListActivity::class.java))
+            startActivity(Intent(this@SplashActivity, SignupActivity::class.java))
             //finish this activity
             finish()
         },4000)
