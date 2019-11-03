@@ -13,6 +13,7 @@ class MainApp : Application(), AnkoLogger {
 
     lateinit var placemarks: PlacemarkStore
 
+
     override fun onCreate() {
 
         super.onCreate()

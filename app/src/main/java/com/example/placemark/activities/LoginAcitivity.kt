@@ -12,18 +12,34 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.placemark.R
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.android.extension.responseJson
+import com.example.placemark.main.MainApp
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login.*
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.IOException
+import org.jetbrains.anko.toast
 
 class LoginActivity : AppCompatActivity() {
+
+
+    private lateinit var auth: FirebaseAuth
+    lateinit var app: MainApp
+
+    //Firebase references
+    private var mDatabaseReference: DatabaseReference? = null
+    private var mDatabase: FirebaseDatabase? = null
+    private var mAuth: FirebaseAuth? = null
+
+    private var mProgressBar: ProgressDialog? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        auth = FirebaseAuth.getInstance()
+
 
         // get reference to all views
         var et_email = findViewById(R.id.etemail) as EditText
@@ -37,8 +53,7 @@ class LoginActivity : AppCompatActivity() {
             val password = et_password.text;
             Toast.makeText(this@LoginActivity, user_email, Toast.LENGTH_LONG).show()
 
-            // your code to validate the user_name and password combination
-            // and verify the same
+
 
         }
 
@@ -48,6 +63,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+
+
+
 
 }
 

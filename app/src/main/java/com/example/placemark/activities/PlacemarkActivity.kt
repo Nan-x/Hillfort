@@ -52,6 +52,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemark = intent.extras?.getParcelable<PlacemarkModel>("placemark_edit")!!
             placemarkTitle.setText(placemark.title)
             placemarkDescription.setText(placemark.description)
+            cb_single.isChecked = placemark.visited
             btnAdd.setText(R.string.button_savePlacemark)
         }
 
