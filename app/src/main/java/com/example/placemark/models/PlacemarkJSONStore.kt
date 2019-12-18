@@ -70,4 +70,9 @@ class PlacemarkJSONStore : PlacemarkStore, AnkoLogger {
         val jsonString = read(context, JSON_FILE)
         placemarks = Gson().fromJson(jsonString, listType)
     }
+
+    override fun findById(id:Long) : PlacemarkModel? {
+        val foundPlacemark: PlacemarkModel? = placemarks.find { it.id == id }
+        return foundPlacemark
+    }
 }

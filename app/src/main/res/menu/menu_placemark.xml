@@ -7,4 +7,11 @@
         android:title="@string/menu_cancel"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/item_delete"
+        android:title="@string/menu_deletePlacemark"
+        android:visible="false"
+        app:showAsAction="always"/>
+
+
 </menu>

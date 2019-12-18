@@ -12,6 +12,8 @@
     <string name="button_location">Set Location</string>
     <string name="button_notes">Add Notes</string>
 
+    <string name="menu_deletePlacemark">Delete</string>
+
 
     <string name="menu_addPlacemark">Add</string>
     <string name="menu_cancel">Cancel</string>
@@ -22,6 +24,10 @@
     <string name="change_placemark_image">Change placemark image</string>
 
     <string name="title_activity_map">Map</string>
+    <string name="title_activity_placemark_map">Map of Hillforts</string>
 
 
+    <string name="placemark_image_placeholder">Hillfort Image</string>
+    <string name="placemark_title_placeholder">Hillfort Title</string>
+    <string name="placemark_description_placeholder">Hillfort Description</string>
 </resources>
