@@ -12,13 +12,13 @@
     <application
         android:name=".main.MainApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/a_hillfort"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.PlacemarkMapActivity"
+            android:name=".views.map.PlacemarkMapView"
             android:label="@string/title_activity_placemark_map"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".views.register.LoginActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SignupActivity" />
+        <activity android:name=".views.register.SignupView" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -53,12 +53,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activities.EditLocationView"
+            android:name=".views.editlocation.EditLocationView"
             android:label="@string/title_activity_map" />
         <activity
-            android:name=".activities.PlacemarkActivity"
-            android:parentActivityName=".activities.PlacemarkListActivity" />
-        <activity android:name=".activities.PlacemarkListActivity">
+            android:name=".views.placemark.PlacemarkView"
+            android:parentActivityName=".views.placemarklist.PlacemarkListView" />
+        <activity android:name=".views.placemarklist.PlacemarkListView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

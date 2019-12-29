@@ -1,34 +1,19 @@
-package com.example.placemark.activities
+package com.example.placemark.views.register
 
-import android.app.ProgressDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.placemark.R
 import com.example.placemark.main.MainApp
-import com.example.placemark.models.UserModel
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.android.extension.responseJson
+import com.example.placemark.views.placemarklist.PlacemarkListView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.jetbrains.anko.toast
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.IOException
 
-class SignupActivity : AppCompatActivity() {
+class SignupView : AppCompatActivity() {
 
     lateinit var auth: FirebaseAuth
     lateinit var app: MainApp
@@ -69,7 +54,7 @@ class SignupActivity : AppCompatActivity() {
 
 
         login.setOnClickListener {
-            val intent = Intent(this@SignupActivity, LoginActivity::class.java)
+            val intent = Intent(this@SignupView, LoginActivity::class.java)
             startActivity(intent)
         }
 
@@ -96,7 +81,7 @@ class SignupActivity : AppCompatActivity() {
 
                     toast("New User Success $user")
 
-                    val intent = Intent(this@SignupActivity, PlacemarkListActivity::class.java)
+                    val intent = Intent(this@SignupView, PlacemarkListView::class.java)
                     startActivity(intent)
 
                 } else {
@@ -114,7 +99,7 @@ class SignupActivity : AppCompatActivity() {
 
  /*   private fun updateUserInfoAndUI() {
         //start next activity
-        val intent = Intent(this@SignupActivity, PlacemarkListActivity::class.java)
+        val intent = Intent(this@SignupView, PlacemarkListView::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
@@ -124,12 +109,12 @@ class SignupActivity : AppCompatActivity() {
         mUser!!.sendEmailVerification()
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this@SignupActivity,
+                    Toast.makeText(this@SignupView,
                         "Verification email sent to " + mUser.getEmail(),
                         Toast.LENGTH_SHORT).show()
                 } else {
                     Log.e(TAG, "sendEmailVerification", task.exception)
-                    Toast.makeText(this@SignupActivity,
+                    Toast.makeText(this@SignupView,
                         "Failed to send verification email.",
                         Toast.LENGTH_SHORT).show()
                 }

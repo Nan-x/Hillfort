@@ -7,7 +7,7 @@ import android.content.Intent
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
-import com.example.placemark.main.MainApp
+import com.example.placemark.views.register.SignupView
 
 class SplashActivity : AppCompatActivity() {
 
@@ -23,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
         //4second splash time
         Handler().postDelayed({
             //start main activity
-            startActivity(Intent(this@SplashActivity, SignupActivity::class.java))
+            startActivity(Intent(this@SplashActivity, SignupView::class.java))
             //finish this activity
             finish()
         },4000)

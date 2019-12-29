@@ -1,4 +1,4 @@
-package com.example.placemark.activities
+package com.example.placemark.views.editlocation
 
 import android.app.Activity
 import android.content.Intent
@@ -8,8 +8,11 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.placemark.models.Location
+import com.example.placemark.views.BasePresenter
+import com.example.placemark.views.BaseView
+import com.example.placemark.views.editlocation.EditLocationView
 
-class MapPresenter(val view: EditLocationView) {
+class EditLocationPresenter(view: BaseView) : BasePresenter(view) {
 
     var location = Location()
 
@@ -17,7 +20,7 @@ class MapPresenter(val view: EditLocationView) {
         location = view.intent.extras?.getParcelable<Location>("location")!!
     }
 
-    fun initMap(map: GoogleMap) {
+    fun doConfigureMap(map: GoogleMap) {
         val loc = LatLng(location.lat, location.lng)
         val options = MarkerOptions()
             .title("Placemark")
@@ -28,17 +31,16 @@ class MapPresenter(val view: EditLocationView) {
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
     }
 
-    fun doUpdateLocation(lat: Double, lng: Double, zoom: Float) {
+    fun doUpdateLocation(lat: Double, lng: Double) {
         location.lat = lat
         location.lng = lng
-        location.zoom = zoom
     }
 
-    fun doOnBackPressed() {
+    fun doSave() {
         val resultIntent = Intent()
         resultIntent.putExtra("location", location)
-        view.setResult(Activity.RESULT_OK, resultIntent)
-        view.finish()
+        view?.setResult(0, resultIntent)
+        view?.finish()
     }
 
     fun doUpdateMarker(marker: Marker) {

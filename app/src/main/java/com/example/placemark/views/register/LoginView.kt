@@ -1,20 +1,16 @@
-package com.example.placemark.activities
+package com.example.placemark.views.register
 
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.placemark.R
+import com.example.placemark.views.placemarklist.PlacemarkListView
 import com.example.placemark.main.MainApp
 import com.example.placemark.models.UserModel
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -61,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         signup.setOnClickListener {
-            val intent = Intent(this@LoginActivity, SignupActivity::class.java)
+            val intent = Intent(this@LoginActivity, SignupView::class.java)
             startActivity(intent)
         }
 
@@ -81,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
                        toast("success $email")
                        if (email != null) {
                            user.email = email
-                           val intent = Intent(this@LoginActivity, PlacemarkListActivity::class.java)
+                           val intent = Intent(this@LoginActivity, PlacemarkListView::class.java)
                            startActivity(intent)
 
                        }
