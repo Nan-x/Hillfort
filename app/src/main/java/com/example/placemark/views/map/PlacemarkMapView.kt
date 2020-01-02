@@ -1,17 +1,13 @@
 package com.example.placemark.views.map
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.placemark.R
 import com.example.placemark.helpers.readImageFromPath
-import com.example.placemark.main.MainApp
 import com.example.placemark.models.PlacemarkModel
 import com.example.placemark.views.BaseView
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 
 import kotlinx.android.synthetic.main.content_placemark_map.*
 import kotlinx.android.synthetic.main.activity_placemark_map.*
@@ -24,7 +20,7 @@ class PlacemarkMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placemark_map)
-        super.init(toolbar)
+        super.init(toolbar, true)
 
         presenter = initPresenter (PlacemarkMapPresenter(this)) as PlacemarkMapPresenter
 
@@ -39,8 +35,7 @@ class PlacemarkMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     override fun showPlacemark(placemark: PlacemarkModel) {
         currentTitle.text = placemark.title
         currentDescription.text = placemark.description
-        currentImage.setImageBitmap(readImageFromPath(this, placemark.image))
-    }
+        Glide.with(this).load(placemark.image).into(currentImage);    }
 
     override fun showPlacemarks(placemarks: List<PlacemarkModel>) {
         presenter.doPopulateMap(map, placemarks)

@@ -19,6 +19,8 @@ class PlacemarkListView :  BaseView(), PlacemarkListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placemark_list)
         setSupportActionBar(toolbar)
+        init(toolbar, false)
+
 
         presenter = initPresenter(PlacemarkListPresenter(this)) as PlacemarkListPresenter
 
@@ -41,6 +43,7 @@ class PlacemarkListView :  BaseView(), PlacemarkListener {
         when (item?.itemId) {
             R.id.item_add -> presenter.doAddPlacemark()
             R.id.item_map -> presenter.doShowPlacemarksMap()
+            R.id.item_logout ->presenter.doLogout()
         }
         return super.onOptionsItemSelected(item)
     }

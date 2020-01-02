@@ -1,6 +1,5 @@
 package com.example.placemark.views.editlocation
 
-import android.app.Activity
 import android.content.Intent
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -10,7 +9,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.example.placemark.models.Location
 import com.example.placemark.views.BasePresenter
 import com.example.placemark.views.BaseView
-import com.example.placemark.views.editlocation.EditLocationView
 
 class EditLocationPresenter(view: BaseView) : BasePresenter(view) {
 
@@ -29,6 +27,7 @@ class EditLocationPresenter(view: BaseView) : BasePresenter(view) {
             .position(loc)
         map.addMarker(options)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+
     }
 
     fun doUpdateLocation(lat: Double, lng: Double) {

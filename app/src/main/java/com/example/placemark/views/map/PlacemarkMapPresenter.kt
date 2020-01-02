@@ -9,27 +9,36 @@ import com.example.placemark.main.MainApp
 import com.example.placemark.models.PlacemarkModel
 import com.example.placemark.views.BasePresenter
 import com.example.placemark.views.BaseView
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class PlacemarkMapPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doPopulateMap(map: GoogleMap, placemarks: List<PlacemarkModel>) {
         map.uiSettings.setZoomControlsEnabled(true)
         placemarks.forEach {
-            val loc = LatLng(it.lat, it.lng)
+            val loc = LatLng(it.location.lat, it.location.lng)
             val options = MarkerOptions().title(it.title).position(loc)
-            map.addMarker(options).tag = it.id
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
+            map.addMarker(options).tag = it
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
         }
     }
 
     fun doMarkerSelected(marker: Marker) {
-        val tag = marker.tag as Long
-        val placemark = app.placemarks.findById(tag)
-        if (placemark != null) view?.showPlacemark(placemark)
-
+        doAsync {
+            val placemark = marker.tag as PlacemarkModel
+            uiThread {
+                if (placemark != null) view?.showPlacemark(placemark)
+            }
+        }
     }
 
     fun loadPlacemarks() {
-        view?.showPlacemarks(app.placemarks.findAll())
+        doAsync {
+            val placemarks = app.placemarks.findAll()
+            uiThread {
+                view?.showPlacemarks(placemarks)
+            }
+        }
     }
 }

@@ -5,16 +5,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.RatingBar
+import android.widget.Toast
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activityplacemark.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 import com.example.placemark.R
 import com.example.placemark.helpers.readImageFromPath
+import com.example.placemark.models.Location
 import com.example.placemark.models.PlacemarkModel
 import com.example.placemark.views.BaseView
 import kotlinx.android.synthetic.main.activityplacemark.description
 import kotlinx.android.synthetic.main.activityplacemark.placemarkTitle
-import kotlinx.android.synthetic.main.card_placemark.*
 
 class PlacemarkView : BaseView(), AnkoLogger {
 
@@ -25,7 +29,7 @@ class PlacemarkView : BaseView(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activityplacemark)
-        super.init(toolbarAdd)
+        super.init(toolbarAdd, true)
 
         presenter = initPresenter (PlacemarkPresenter(this)) as PlacemarkPresenter
 
@@ -39,17 +43,33 @@ class PlacemarkView : BaseView(), AnkoLogger {
         chooseImage.setOnClickListener { presenter.doSelectImage() }
 
       //  placemarkLocation.setOnClickListener { presenter.doSetLocation() }
+
+
+        //RatingBar
+        val rBar = findViewById<RatingBar>(R.id.rBar)
+        if (rBar != null) {
+            val button = findViewById<Button>(R.id.button)
+            button?.setOnClickListener {
+                val msg = rBar.rating.toString()
+            }
+        }
     }
+
+
 
     override fun showPlacemark(placemark: PlacemarkModel) {
         placemarkTitle.setText(placemark.title)
         description.setText(placemark.description)
-        placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
+        Glide.with(this).load(placemark.image).into(placemarkImage);
         if (placemark.image != null) {
             chooseImage.setText(R.string.change_placemark_image)
         }
-        lat.setText("%.6f".format(placemark.lat))
-        lng.setText("%.6f".format(placemark.lng))
+        this.showLocation(placemark.location)
+    }
+
+    override fun showLocation(location: Location) {
+        lat.setText("%.6f".format(location.lat))
+        lng.setText("%.6f".format(location.lng))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -79,6 +99,7 @@ class PlacemarkView : BaseView(), AnkoLogger {
             presenter.doActivityResult(requestCode, resultCode, data)
         }
     }
+
 
     override fun onBackPressed() {
         presenter.doCancel()

@@ -4,6 +4,9 @@ import com.example.placemark.models.PlacemarkModel
 import com.example.placemark.views.BasePresenter
 import com.example.placemark.views.BaseView
 import com.example.placemark.views.VIEW
+import com.google.firebase.auth.FirebaseAuth
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 
 class PlacemarkListPresenter(view: BaseView) : BasePresenter(view) {
@@ -21,6 +24,20 @@ class PlacemarkListPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun loadPlacemarks() {
-        view?.showPlacemarks(app.placemarks.findAll())
+        doAsync {
+            val placemarks = app.placemarks.findAll()
+            uiThread {
+                view?.showPlacemarks(placemarks)
+            }
+        }
+    }
+
+    fun doLogout() {
+        FirebaseAuth.getInstance().signOut()
+
+        app.placemarks.clear()
+
+        view?.navigateTo(VIEW.LOGIN)
+
     }
 }

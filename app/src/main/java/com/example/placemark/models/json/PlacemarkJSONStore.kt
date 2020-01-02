@@ -1,4 +1,4 @@
-package com.example.placemark.models
+package com.example.placemark.models.json
 
 import android.content.Context
 import com.example.placemark.helpers.exists
@@ -8,7 +8,8 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
-import com.example.placemark.helpers.*
+import com.example.placemark.models.PlacemarkModel
+import com.example.placemark.models.PlacemarkStore
 import java.util.*
 
 val JSON_FILE = "placemarks.json"
@@ -43,17 +44,15 @@ class PlacemarkJSONStore : PlacemarkStore, AnkoLogger {
 
 
     override fun update(placemark: PlacemarkModel) {
-        var foundPlacemark: PlacemarkModel? = placemarks.find { p -> p.id == placemark.id }
+        val placemarksList = findAll() as ArrayList<PlacemarkModel>
+        var foundPlacemark: PlacemarkModel? = placemarksList.find { p -> p.id == placemark.id }
         if (foundPlacemark != null) {
             foundPlacemark.title = placemark.title
             foundPlacemark.description = placemark.description
             foundPlacemark.image = placemark.image
-            foundPlacemark.visited = placemark.visited
-            foundPlacemark.lat = placemark.lat
-            foundPlacemark.lng = placemark.lng
-            foundPlacemark.zoom = placemark.zoom
-            serialize()
+            foundPlacemark.location = placemark.location
         }
+        serialize()
     }
 
     override fun delete(placemark: PlacemarkModel) {
@@ -62,7 +61,9 @@ class PlacemarkJSONStore : PlacemarkStore, AnkoLogger {
     }
 
     private fun serialize() {
-        val jsonString = gsonBuilder.toJson(placemarks, listType)
+        val jsonString = gsonBuilder.toJson(placemarks,
+            listType
+        )
         write(context, JSON_FILE, jsonString)
     }
 
@@ -74,5 +75,9 @@ class PlacemarkJSONStore : PlacemarkStore, AnkoLogger {
     override fun findById(id:Long) : PlacemarkModel? {
         val foundPlacemark: PlacemarkModel? = placemarks.find { it.id == id }
         return foundPlacemark
+    }
+
+    override fun clear() {
+        placemarks.clear()
     }
 }

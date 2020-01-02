@@ -1,5 +1,7 @@
-package com.example.placemark.models
+package com.example.placemark.models.mem
 
+import com.example.placemark.models.PlacemarkModel
+import com.example.placemark.models.PlacemarkStore
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -29,10 +31,8 @@ class PlacemarkMemStore : PlacemarkStore, AnkoLogger {
             foundPlacemark.title = placemark.title
             foundPlacemark.description = placemark.description
             foundPlacemark.image = placemark.image
-            foundPlacemark.lat = placemark.lat
-            foundPlacemark.lng = placemark.lng
-            foundPlacemark.zoom = placemark.zoom
-            logAll()
+            foundPlacemark.location = placemark.location
+            logAll();
         }
     }
 
@@ -47,6 +47,10 @@ class PlacemarkMemStore : PlacemarkStore, AnkoLogger {
     override fun findById(id:Long) : PlacemarkModel? {
         val foundPlacemark: PlacemarkModel? = placemarks.find { it.id == id }
         return foundPlacemark
+    }
+
+    override fun clear() {
+        placemarks.clear()
     }
 }
 

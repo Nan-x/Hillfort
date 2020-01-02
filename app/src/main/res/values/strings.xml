@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hillfort Placemarks</string>
+    <string name="app_name">Hillforts</string>
 
     <string name="hint_placemarkTitle">Hillfort Name</string>
     <string name="hint_placemarkDescription">Hillfort Description</string>
@@ -21,7 +21,7 @@
     <string name="enter_placemark_title"> Please enter name of hillfort </string>
 
     <string name="select_placemark_image">Select hillfort image</string>
-    <string name="change_placemark_image">Change placemark image</string>
+    <string name="change_placemark_image">Change hillfort image</string>
 
     <string name="title_activity_map">Map</string>
     <string name="title_activity_placemark_map">Map of Hillforts</string>
@@ -34,5 +34,8 @@
 
     <string name="menu_savePlacemark">Save</string>
 
+
+    <string name="menu_showMap">Show Map</string>
+    <string name="menu_logout">Logout</string>
 
 </resources>
